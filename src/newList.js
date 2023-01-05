@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { UseStateContext } from "./stateContext";
 import { Draggable } from "react-beautiful-dnd";
 import { IconUncheck } from "./icons";
+import { taskDelete, taskCompleted } from "./functions";
 
 const listStatus = {
     todo: '',
@@ -11,8 +12,6 @@ const listStatus = {
 }
 
 const ColumnWrapping = styled.div`
-`;
-const TaskContent = styled.div`
     margin: 12px 0;
     padding: 6px;
     border: 1px solid lightgray;
@@ -21,37 +20,31 @@ const TaskContent = styled.div`
     display: flex;
 `;
 const Checkboxs = styled.div`
-    margin: auto 0;
+    margin: auto 1px;
     height:30px;
 
+    &:hover{
+        cursor: pointer;
+        height: 36px;
+    }
 `
 const Content = styled.div`
     margin: auto 9px;
-    width: 80%;
+    width: 90%;
 `
 const BtnDelete = styled.button`
     background-color: rgba(255, 99, 71, 0);
     border: none;
     height: 30px;
-    color: gray;
+    color: rgb(180, 180, 180);
+
+    &:hover{
+        cursor: pointer;
+        height: 36px;
+        color: rgb(90, 90, 90);
+    }
 `
 
-function NewList({taskObj, index}) {
-    /*
-    const taskIds = column.taskIds;
-    const idReversed = taskIds.slice().reverse();
-    console.log(idReversed);
-    */
-    return(
-        /*idReversed.map((id, index) => {
-            const subtask = state.tasks[id]*/
-        <TaskContent status={taskObj.completed} index={index}>
-            <Checkboxs><IconUncheck /></Checkboxs>
-            <Content>{taskObj.title}</Content>
-            <BtnDelete>X</BtnDelete>
-        </TaskContent>
-    )
-}
 
 export default function NewColumn({ taskObj, index, colName }) {
     const stateFromProvider = UseStateContext();
@@ -61,13 +54,14 @@ export default function NewColumn({ taskObj, index, colName }) {
     return(
         <Draggable draggableId={taskObj.id} index={index}>
             {(provided, snapshot) => (
-                <ColumnWrapping key={colName} 
+                <ColumnWrapping key={colName} status={taskObj.completed} index={index}
                     { ...provided.draggableProps }
-                    { ...provided.dragHandleProps }
                     ref = { provided.innerRef }
                     isDragging = { snapshot.isDragging }
-                >
-                    <NewList taskObj={taskObj} index={index}></NewList>
+                > 
+                    <Checkboxs onClick={()=> stateFromProvider.setState(taskCompleted(taskObj, state, colName,index))}><IconUncheck /></Checkboxs>
+                    <Content { ...provided.dragHandleProps }>{taskObj.title}</Content>
+                    <BtnDelete onClick={()=> stateFromProvider.setState(taskDelete(taskObj, state, colName,index))}>X</BtnDelete>
                 </ColumnWrapping>
                 )
             }

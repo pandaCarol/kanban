@@ -32,6 +32,7 @@ export default function DndWrapping() {
     
         if (!destination) { return };
         if ( source.index === destination.index && source.droppableId === destination.droppableId) { return };
+        console.log(draggableId);
 
         // dnd in a same column 
         if(source.droppableId === destination.droppableId) {
@@ -63,13 +64,19 @@ export default function DndWrapping() {
         //dnd between different columns
         const colfrom = state.columns[source.droppableId];
         const colTo = state.columns[destination.droppableId];
-
+        const isCompleted = destination.droppableId === 'column-3' ? true : false;
+        
         const colfromTaskIds = Array.from(colfrom.taskIds);
         colfromTaskIds.splice(source.index, 1);
         console.log(colfromTaskIds);
         const colToTaskIds = Array.from(colTo.taskIds);
         colToTaskIds.splice(0, 0, draggableId);
         console.log(colToTaskIds);
+
+        const newTask = {
+          ...state.tasks[draggableId],
+          "completed": isCompleted,
+        }
 
         const newColumnfrom = {
           ...colfrom,
@@ -81,6 +88,10 @@ export default function DndWrapping() {
         }
         const newState = {
           ...state,
+          tasks: {
+            ...state.tasks,
+            [draggableId]: newTask,
+          },
           columns: {
             ...state.columns, 
             [colfrom.id]: newColumnfrom,

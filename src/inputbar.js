@@ -8,6 +8,8 @@ const InputBar = styled.input`
     border: 1px solie lightgray;
     min-height: 36px;
     min-width: 60%;
+    margin-bottom: 30px;
+
 `;
 
 export default function InputComponent() {

@@ -13,9 +13,26 @@ const TitleCol = styled.h2`
     padding: 12px;    
     text-align: center;
 `;
+const TasksInfo = styled.div`
+    text-align: center;s
+`
 const TodoTask = styled.div`
     padding: 8px;
 `;
+
+function infos(col) {
+    const info = col.taskIds.length > 1 ? `${col.taskIds.length} tasks` :  `${col.taskIds.length} task`;
+    switch(col.title) {
+        case 'To do List':
+            return(`${info} left`);
+        case 'In progress':
+            return(`${info} in progress`);
+        case 'Done':
+            return(`${info} completed`);
+        default:
+            break;
+    }
+}
 
 //***Questions:
 // */ I have no idea where is the upper level of 'isDraggingOver'. Props.isDraagingOver undef, but below snapshot.isDragging Over works!
@@ -37,6 +54,7 @@ export default function ColumnList({col, tasks}) {
                     //isDraggingOver = {snapshot.isDraggingOver}
                 >
                     <TitleCol>{col.title}</TitleCol>
+                    <TasksInfo>{infos(col)}</TasksInfo>
                     <TodoTask>{tasks.map((task, index)=> <NewColumn key={task.id} taskObj={task} index={index} colName={col.id}></NewColumn>)}</TodoTask>
                     {/*console.dir(Droppable.snapshot)*/}
                     { provided.placeholder }
