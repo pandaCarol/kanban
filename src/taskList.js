@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
+import NewColumn from "./newList";
 
 const TaskItem = styled.div`
 margin: 12px;   
@@ -19,7 +20,7 @@ export default function TaskList({ taskObj, index }) {
                     ref = { provided.innerRef }
                     isDragging = { snapshot.isDragging }
                 >
-                    { taskObj.title }
+                    <NewColumn></NewColumn>
                 </TaskItem>
             )}
         </Draggable>

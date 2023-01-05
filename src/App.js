@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 export default function App() {
   const [state, setState] = useState(DataObj);
-
+  
   let col;
   let taskInCol;
   const columnGroup = state.columnOrder.map((colId) => {
@@ -22,7 +22,20 @@ export default function App() {
     )
   })
 
+
+  const onDragStart = () => {
+    document.body.style.color = 'red';
+  }
+
+  const onDragUpdate = () => {
+
+  }
+
   const onDragEnd = result => {
+    // after dnd, visiable style back to initial def
+    document.body.style.color = "inherit";
+    document.body.style.color = "inherit";
+
     const { destination, source, draggableId } = result;
 
     if (!destination) { return };
@@ -50,8 +63,12 @@ export default function App() {
   }
 
   return(
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div>{columnGroup}</div>
+    <DragDropContext 
+      onDragStart = { onDragStart }
+      onDragUpdate = { onDragUpdate }
+      onDragEnd = { onDragEnd }
+    >
+      <div>{ columnGroup }</div>
     </DragDropContext>
     
   )
