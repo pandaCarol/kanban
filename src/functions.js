@@ -16,6 +16,7 @@ export function createNewList(state,value) {
         "title": value,
         "completed": false,
         "isDelete": false,
+        "isImportant": false,
     }
     const newDataObj = {
         ...state,
@@ -108,6 +109,24 @@ export function taskCompleted(task, state, colName, index) {
     }
     return(newState);
 }
+
+export function flagClick(task, state) {
+    //modified the task status to contray
+    const updateImpt = !task.isImportant;
+    const newTask = {
+        ...task,
+        isImportant: updateImpt,
+    }
+
+    //update state
+    const newState = {
+        ...state,
+    };
+    newState.tasks[task.id] = newTask;
+    return(newState);
+}
+
+
 
 
 

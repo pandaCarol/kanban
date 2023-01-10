@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import NewColumn from "./newList";
 import { Droppable } from "react-beautiful-dnd";
+import SubTask from "./newList";
 
 const Container = styled.div`
     margin: 6px;
@@ -55,7 +55,7 @@ export default function ColumnList({col, tasks}) {
                 >
                     <TitleCol>{col.title}</TitleCol>
                     <TasksInfo>{infos(col)}</TasksInfo>
-                    <TodoTask>{tasks.map((task, index)=> <NewColumn key={task.id} taskObj={task} index={index} colName={col.id}></NewColumn>)}</TodoTask>
+                    <TodoTask>{tasks.map((task, index)=> <SubTask key={task.id} taskObj={task} index={index} colName={col.id}></SubTask>)}</TodoTask>
                     {/*console.dir(Droppable.snapshot)*/}
                     { provided.placeholder }
                 </Container>

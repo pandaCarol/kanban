@@ -7,6 +7,7 @@ const DataObj = {
             "title": "delectus aut autem",
             "completed": false,
             "isDelete": false,
+            "isImportant": false,
         },
         'task-2': {
             "userId": 1,
@@ -14,6 +15,7 @@ const DataObj = {
             "title": "quis ut nam facilis et officia qui",
             "completed": false,
             "isDelete": false,
+            "isImportant": false,
         },
         'task-3': {
             "userId": 1,
@@ -21,6 +23,7 @@ const DataObj = {
             "title": "fugiat veniam minus",
             "completed": false,
             "isDelete": false,
+            "isImportant": false,
         },
         'task-4': {
             "userId": 1,
@@ -28,6 +31,7 @@ const DataObj = {
             "title": "et porro tempora",
             "completed": true,
             "isDelete": false,
+            "isImportant": true,
         },
         'task-5': {
             "userId": 1,
@@ -35,6 +39,7 @@ const DataObj = {
             "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
             "completed": false,
             "isDelete": false,
+            "isImportant": false,
         },
         'task-6': {
             "userId": 1,
@@ -42,6 +47,7 @@ const DataObj = {
             "title": "qui ullam ratione quibusdam voluptatem quia omnis",
             "completed": false,
             "isDelete": false,
+            "isImportant": false,
         },
     },
 

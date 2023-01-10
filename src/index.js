@@ -7,7 +7,6 @@ import StateProvider from './stateContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-
     <StateProvider>
       <TodoList></TodoList>
     </StateProvider>
