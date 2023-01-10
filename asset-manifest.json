@@ -1,12 +1,16 @@
 {
   "files": {
-    "main.js": "/kanban/static/js/main.a57021b5.js",
+    "main.js": "/kanban/static/js/main.643a8956.js",
     "static/js/787.5d7b65c0.chunk.js": "/kanban/static/js/787.5d7b65c0.chunk.js",
+    "static/media/checkboxClick.svg": "/kanban/static/media/checkboxClick.43ea2f9376d735b5302c761686b1440c.svg",
+    "static/media/flagDeactive.svg": "/kanban/static/media/flagDeactive.0fd9773f3feabfd1079080fe1c590b82.svg",
+    "static/media/flagActive.svg": "/kanban/static/media/flagActive.ffc97071ed5c8ec130df879e49e86b9c.svg",
     "index.html": "/kanban/index.html",
-    "main.a57021b5.js.map": "/kanban/static/js/main.a57021b5.js.map",
+    "static/media/checkboxUnclick.svg": "/kanban/static/media/checkboxUnclick.2e7c675279c13671224dbded7cf89331.svg",
+    "main.643a8956.js.map": "/kanban/static/js/main.643a8956.js.map",
     "787.5d7b65c0.chunk.js.map": "/kanban/static/js/787.5d7b65c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.a57021b5.js"
+    "static/js/main.643a8956.js"
   ]
 }
