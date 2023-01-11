@@ -1,12 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import SubTask from "./newList";
 
-const Container = styled.div`
+const ColumnContainer = styled.div`
     margin: 6px;
     width: 50%;
-    min-height: 180px;
+    border-radius: 12px;
+
+    background-color: ${props => props.isDragging ? 'rgba(102, 121, 187, 0.25)' : 'rgba(102, 121, 187, 0)'}
+`
+
+const Container = styled.div`
+    border-radius: 12px;
+    min-height: 100%;
 `;
 const TitleCol = styled.h2`
     margin: 12px;   
@@ -18,6 +25,7 @@ const TasksInfo = styled.div`
 `
 const TodoTask = styled.div`
     padding: 8px;
+    min-height: 120px;
 `;
 
 function infos(col) {
@@ -35,32 +43,49 @@ function infos(col) {
 }
 
 //***Questions:
-// */ I have no idea where is the upper level of 'isDraggingOver'. Props.isDraagingOver undef, but below snapshot.isDragging Over works!
-//border: ${props => (props.isDraggingOver ? '3px solide lightyellow' : 'lightgray')};
+// */ I have no idea where is the upper level of 'isDraggingOver'. Props.isDraagingOver undef, but below snapshot.isDragging Over works! 
+// !!!! Question solved! see "line 11" about $ColumnContainer = styled.div`$
 
-export default function ColumnList({col, tasks}) {
+export default function ColumnList({col, tasks, index}) {
     //console.dir(<i class="fa fa-tasks" aria-hidden="true"></i>);
     //console.log(col);
     //console.log(tasks);
+    
 
     return(
-        <Droppable droppableId={col.id}>
+        <Draggable draggableId={col.id} index={index}>
             {(provided, snapshot) => (
-                <Container 
-                    ref = {provided.innerRef}
-                    {...provided.droppableProps}
-                    style = {{border: snapshot.isDraggingOver ? '6px solid lightgray' : '1px solid gray'}}
-                    //****Using style ={...} way to solve the problem that can't find the upper level */
-                    //isDraggingOver = {snapshot.isDraggingOver}
+                <ColumnContainer
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                    isDragging = {snapshot.isDragging}
                 >
-                    <TitleCol>{col.title}</TitleCol>
-                    <TasksInfo>{infos(col)}</TasksInfo>
-                    <TodoTask>{tasks.map((task, index)=> <SubTask key={task.id} taskObj={task} index={index} colName={col.id}></SubTask>)}</TodoTask>
-                    {/*console.dir(Droppable.snapshot)*/}
-                    { provided.placeholder }
-                </Container>
+                    <Droppable droppableId={col.id} type="task">
+                        {(provided, snapshot) => (
+                            <Container 
+                                style = {{border: snapshot.isDraggingOver ? '3px solid rgba(102, 121, 187, 0.5)' : '1px solid lightgray'}}
+                                //****Using style ={...} way to solve the problem that can't find the upper level */
+                                //isDraggingOver = {snapshot.isDraggingOver}
+                            >
+                                <TitleCol>{col.title}</TitleCol>
+                                <TasksInfo>{infos(col)}</TasksInfo>
+                                <TodoTask
+                                    ref = {provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {tasks.map((task, index)=> <SubTask key={task.id} taskObj={task} index={index} colName={col.id}></SubTask>)}
+                                </TodoTask>
+                                {/*console.dir(Droppable.snapshot)*/}
+                                { provided.placeholder }
+                            </Container>
+                        )}
+                    </Droppable>
+                </ColumnContainer>
             )}
-        </Droppable>
+        </Draggable>
+        
+        
         
     )
 }

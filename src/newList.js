@@ -43,7 +43,7 @@ const Checkboxs = styled.div`
     &:hover{
         cursor: pointer;
         background-color: rgba(102, 121, 187, 0.5);
-        opacity: 0.3
+        opacity: 0.5
     }
 `;
 const Content = styled.div`
